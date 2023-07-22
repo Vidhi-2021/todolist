@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To do list</title>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-6 mt-3 ">
+                <h2 class="text-center">To Do List</h2>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-6">
+                <div class="">
+                    <div class="">
+                        <div class="col-12">
+                            <label for="task1" class="visually-hidden">Task:</label>
+                            <input type="text" class="form-control" id="task1" placeholder="Add Task" />
+                        </div>
+                        <div class="col-12 mt-6">
+                            <div class="">
+                                <button class="btn btn-primary" type="button" onclick="addTask()">Add Task</button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center mt-4">
+            <div class="col-12 col-md-6">
+                <h2 class="text-center">Pending Task</h2>
+                <ol class="list-group list-group-numbered" id="op">
+
+                </ol>
+            </div>
+        </div>
+        <div class="row justify-content-center mt-4">
+            <div class="col-12 col-md-6">
+                <h2 class="text-center">Completed Task</h2>
+                <ol class="list-group list-group-numbered" id="op1">
+
+                </ol>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="js/bootstrap.js"></script>
+    <script type="text/javascript">
+        data = document.getElementById('task1')
+        op = document.getElementById('op')
+        op1 = document.getElementById('op1')
+
+        tasklist = ['breakfast', 'lunch', 'dinner', 'sleep', 'repeat']
+        tasklist1=[]
+        function addTask() {
+            r = data.value
+            tasklist.push(r)
+            data.values = ""
+            viewTask()
+        }
+
+        function viewTask() {
+            res = ""
+            for (i = 0; i < tasklist.length; i++) {
+                res = res + `<li class="list-group-item">${tasklist[i]}<button class='btn btn-danger btn-sm' onclick='deleteTask(${i})'>Delete</button><button class='btn btn-success btn-sm' onclick='CompleteTask(${i})'>Complete</button></li>`;
+            }
+            op.innerHTML = res
+        }
+        function viewtask() {
+            res1 = ""
+            for (i = 0; i < tasklist1.length; i++) {
+                res1 = res1 + `<li class="list-group-item">${tasklist1[i]}<button class='btn btn-danger btn-sm' onclick='deleteTask1(${i})'>Delete</button></li>`;
+            }
+            op1.innerHTML = res1
+        }
+        function deleteTask(arg) {
+            res = tasklist.splice(arg, 1)
+            viewTask()
+
+        }
+        function deleteTask1(arg) {
+            res = tasklist1.splice(arg, 1)
+            viewTask()
+            viewtask()
+        }
+        function CompleteTask(arg) {
+            res=tasklist.splice(arg,1)
+            tasklist1.push(res)
+            data.values=""
+            viewtask()
+            viewTask()
+        }
+        
+        viewTask();
+        viewtask()
+        
+
+    </script>
+
+</body>
+
+</html>
